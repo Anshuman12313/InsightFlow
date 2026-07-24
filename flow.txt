@@ -1,0 +1,30 @@
+User will upload csv file -> we will read csv -> provide the available columns in csv to user => user will select the require columns => user will select the main comments columns 
+=> then use check for null rows and then duplicate rows on it => then apply the actions on comment coluns such as converting them to lower case, removing extra spces=>add columns like word_count that will contain how much wordcount of comment in paritcular row
+=>convert them in embeedings using model like all-MiniLM-L6-v2 => use hdbscan to make cluster of them =>now finally convert one cluster into one issue by providing its data to llm which will make it more clear=>
+also how much comments in that particular cluster what are the most common of them such that even from that we can know which problem is more important to resolve
+
+
+
+POST /upload
+    ↓
+Returns file_id + columns
+
+POST /preprocess
+    ↓
+Returns preprocessing statistics
+
+POST /embed
+    ↓
+Generates embeddings
+
+POST /cluster
+    ↓
+Runs HDBSCAN
+
+POST /summarize
+    ↓
+Generates issue summaries
+
+GET /results/{file_id}
+    ↓
+Returns final ranked issues
