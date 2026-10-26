@@ -10,10 +10,11 @@ from a import feedback
 
 
 os.makedirs("uploads", exist_ok=True)
+from auth import router as auth_router
 
 
 app = FastAPI(title="Feedback Clustering API")
-
+app.include_router(auth_router)
 
 # --------------------------------------------------
 # CORS

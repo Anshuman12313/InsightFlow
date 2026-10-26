@@ -33,6 +33,28 @@ export async function analyzeData({ usefulColumns, feedbackColumn, fileName }) {
 
   return response.data
 }
+export async function loginUser(username, password) {
+  const API_URL =
+    import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Login failed");
+  }
+
+  localStorage.setItem("access_token", data.access_token);
+
+  return data;
+}
 
 export function getErrorMessage(error) {
   if (error.response?.data?.detail) {
